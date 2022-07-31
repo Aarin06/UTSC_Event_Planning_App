@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">CSCB07_Project</string>
+    <string name="event_page_title">Events Page</string>
+    <string name="events_scrollview">A scrollview used to display all upcoming evening</string>
+    <string name="join_event">Join Event</string>
+    <string name="selete_event">Select Event</string>
+
 </resources>
