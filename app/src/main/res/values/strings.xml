@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">CSCB07_Project</string>
+    <string name="edit_email">Email Address</string>
+    <string name="edit_pw">Password</string>
+    <string name="button_login">Login</string>
+    <string name="text_register">Register</string>
+    <string name="edit_name">Name</string>
+    <string-array name="auth">
+        <item>User</item>
+        <item>Admin</item>
+    </string-array>
+    <string name="button_register">Register</string>
+    <string name="text_back">Back</string>
 </resources>

@@ -1,4 +1,4 @@
-package Classes;
+package com.example.cscb07_project;
 
 public class Event {
     int eventID;
