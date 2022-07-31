@@ -14,7 +14,11 @@
         android:theme="@style/Theme.CSCB07_Project"
         tools:targetApi="31">
         <activity
+<<<<<<< HEAD
             android:name=".EventsActivity"
+=======
+            android:name=".Registration"
+>>>>>>> de7eb33f7d18f36cf854e1597bf77b44f3067ff1
             android:exported="false" />
         <activity
             android:name=".MainActivity"
