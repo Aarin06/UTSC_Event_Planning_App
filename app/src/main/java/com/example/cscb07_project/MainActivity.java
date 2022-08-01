@@ -88,7 +88,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 if (status == 0) {
                                     //To whoever is dealing with the user end of things, replace the line below
                                     //and redirect to a new activity.
-                                    Toast.makeText(MainActivity.this, "Logged in as user!", Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(MainActivity.this, "Logged in as user!", Toast.LENGTH_LONG).show();
+                                    startActivity(new Intent(MainActivity.this, ViewUserEventsActivity.class));
                                 } else {
                                     //To whoever is dealing with the admin end of things, replace the line below
                                     //and redirect to a new activity.
