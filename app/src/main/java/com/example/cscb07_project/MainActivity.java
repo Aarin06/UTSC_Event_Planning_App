@@ -92,7 +92,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 } else {
                                     //To whoever is dealing with the admin end of things, replace the line below
                                     //and redirect to a new activity.
-                                    Toast.makeText(MainActivity.this, "Logged in as admin!", Toast.LENGTH_LONG).show();
+
+                                    Intent intentPassAdminID = new Intent (this, Temp.class);
+                                    startActivity(intentPassAdminID);
+
                                 }
                             } else {
                                 //This should not happen.

@@ -14,6 +14,12 @@
         android:theme="@style/Theme.CSCB07_Project"
         tools:targetApi="31">
         <activity
+            android:name=".regardButConstraintLAyout"
+            android:exported="false" />
+        <activity
+            android:name=".RegardAndAddVenues_Admin"
+            android:exported="false" />
+        <activity
             android:name=".Registration"
             android:exported="false" />
         <activity
