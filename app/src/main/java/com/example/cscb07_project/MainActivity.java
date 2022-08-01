@@ -2,7 +2,10 @@ package com.example.cscb07_project;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -54,24 +57,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void login() {
         String email = emailField.getText().toString().trim();
         String password = passwordField.getText().toString().trim();
-        boolean emailEmpty = false, passwordEmpty= false;
-        if (email.equals(""))
-            emailEmpty = true;
-        if (password.equals(""))
-            passwordEmpty = true;
-        if (emailEmpty || passwordEmpty) {
-            if (emailEmpty)
+        if (email.equals("") || password.equals("") || password.length() < 6 || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            if (email.equals(""))
                 emailField.setError("This field is required.");
-            if (passwordEmpty)
+            else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches())
+                emailField.setError("Invalid email.");
+            if (password.equals(""))
                 passwordField.setError("This field is required.");
-            return;
-        }
-        if (password.length() < 6) {
-            passwordField.setError("Password must be at least six characters.");
-            return;
-        }
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailField.setError("Invalid email.");
+            else if (password.length() < 6)
+                passwordField.setError("Password must be at least six characters.");
             return;
         }
         fire.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -83,8 +77,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         @Override
                         public void onComplete(@NonNull Task<DataSnapshot> task) {
                             if (task.isSuccessful()) {
-                                String data = String.valueOf(task.getResult().getValue()).trim();
-                                int status = Integer.parseInt(data.substring(data.length() - 2, data.length() - 1));
+                                String data = String.valueOf(task.getResult().child("status").getValue());
+                                int status = Integer.parseInt(data);
+                                SharedPreferences preferences = MainActivity.this.getPreferences(Context.MODE_PRIVATE);
+                                preferences.edit().putString("uID", uID);
+                                preferences.edit().apply();
                                 if (status == 0) {
                                     //To whoever is dealing with the user end of things, replace the line below
                                     //and redirect to a new activity.
