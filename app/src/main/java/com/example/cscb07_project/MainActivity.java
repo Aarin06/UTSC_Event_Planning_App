@@ -84,10 +84,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         public void onComplete(@NonNull Task<DataSnapshot> task) {
                             if (task.isSuccessful()) {
                                 String data = String.valueOf(task.getResult().getValue()).trim();
+                                System.out.println(data);
                                 int status = Integer.parseInt(data.substring(data.length() - 2, data.length() - 1));
                                 if (status == 0) {
                                     //To whoever is dealing with the user end of things, replace the line below
                                     //and redirect to a new activity.
+                                    eventsPage();
                                     Toast.makeText(MainActivity.this, "Logged in as user!", Toast.LENGTH_LONG).show();
                                 } else {
                                     //To whoever is dealing with the admin end of things, replace the line below
@@ -104,5 +106,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
+    }
+
+    private void eventsPage() {
+        startActivity(new Intent(this, EventsActivity.class));
     }
 }
