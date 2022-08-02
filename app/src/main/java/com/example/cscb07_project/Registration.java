@@ -19,10 +19,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Registration extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class Registration extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuth fire;
-    private Spinner auth;
-    private short status = 0;
     private EditText nameField, emailField, passwordField;
     private TextView back;
     private Button register;
@@ -32,8 +30,6 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
         fire = FirebaseAuth.getInstance();
-        auth = (Spinner)findViewById(R.id.authentication);
-        auth.setOnItemSelectedListener(this);
         nameField = (EditText)findViewById(R.id.name);
         emailField = (EditText)findViewById(R.id.email);
         passwordField = (EditText)findViewById(R.id.password);
@@ -59,47 +55,32 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         String name = nameField.getText().toString().trim();
         String email = emailField.getText().toString().trim();
         String password = passwordField.getText().toString().trim();
-        boolean nameEmpty = false, emailEmpty = false, passwordEmpty= false;
-        if (name.equals(""))
-            nameEmpty = true;
-        if (email.equals(""))
-            emailEmpty = true;
-        if (password.equals(""))
-            passwordEmpty = true;
-        if (nameEmpty || emailEmpty || passwordEmpty) {
-            if (nameEmpty)
+        if (name.equals("") || email.equals("") || password.equals("") || password.length() < 6 || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            if (name.equals(""))
                 nameField.setError("This field is required.");
-            if (emailEmpty)
+            if (email.equals(""))
                 emailField.setError("This field is required.");
-            if (passwordEmpty)
+            else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches())
+                emailField.setError("Invalid email.");
+            if (password.equals(""))
                 passwordField.setError("This field is required.");
-            return;
-        }
-        if (password.length() < 6) {
-            passwordField.setError("Password must be at least six characters.");
-            return;
-        }
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailField.setError("Invalid email.");
+            else if (password.length() < 6)
+                passwordField.setError("Password must be at least six characters.");
             return;
         }
         fire.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        Account account;
                         String uID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                        if (status == 0)
-                            account = new User(name, email, uID);
-                        else
-                            account = new Admin(name, email, uID);
+                        User user = new User(name, email, uID);
                         FirebaseDatabase.getInstance().getReference("Users").child(
-                            FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(account).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(Task<Void> task) {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(Registration.this, "Registration Successful!", Toast.LENGTH_LONG).show();
-                                    redirect();
+                                    startActivity(new Intent(Registration.this, MainActivity.class));
                                 } else {
                                     Toast.makeText(Registration.this, "Registration Unsuccessful.", Toast.LENGTH_LONG).show();
                                 }
@@ -110,22 +91,5 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                     }
                 }
             });
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        if (adapterView.getItemAtPosition(i).toString().equals("User"))
-            status = 0;
-        else
-            status = 1;
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-        status = 0;
-    }
-
-    private void redirect() {
-        startActivity(new Intent(this, MainActivity.class));
     }
 }
