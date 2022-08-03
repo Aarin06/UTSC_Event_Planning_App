@@ -1,5 +1,6 @@
 package com.example.cscb07_project;
 
+
 import java.util.ArrayList;
 
 public class Event {
@@ -9,22 +10,27 @@ public class Event {
     int numPlayers; //currently at
     String eventName;
     ArrayList<String> enrolledPlayers;
+
     String startTime; //java contains Date objects
     String endTime;
     boolean eventApproved;
 
+
     public Event(){}
 
     public Event(String eventID, String creatorID, int maxPlayers, int numPlayers, String eventName, ArrayList<String> enrolledPlayers, String startTime, String endTime, boolean eventApproved) {
+
         this.eventID = eventID;
         this.creatorID = creatorID;
         this.maxPlayers = maxPlayers;
         this.numPlayers = numPlayers;
         this.eventName = eventName;
+
         this.enrolledPlayers = enrolledPlayers;
         this.startTime = startTime;
         this.endTime = endTime;
         this.eventApproved = eventApproved;
+
     }
 
     public void setEventID(String eventID) {
@@ -40,6 +46,7 @@ public class Event {
     }
 
     public void setNumPlayers(int numPlayers) {
+
         this.numPlayers = numPlayers;
     }
 
@@ -63,6 +70,7 @@ public class Event {
         this.eventApproved = eventApproved;
     }
 
+
     public String getEventID() {
         return eventID;
     }
@@ -76,6 +84,7 @@ public class Event {
     }
 
     public int getNumPlayers() {
+
         return numPlayers;
     }
 
@@ -83,9 +92,11 @@ public class Event {
         return eventName;
     }
 
+
     public ArrayList<String> getEnrolledPlayers() {
         return enrolledPlayers;
     }
+
 
     public String getStartTime() {
         return startTime;
@@ -99,6 +110,7 @@ public class Event {
         return eventApproved;
     }
 
+
     @Override
     public String toString(){
         return this.getEventName() + "" +
@@ -107,4 +119,6 @@ public class Event {
                 "\nCurrent number of players: " + Long.toString(this.getNumPlayers()) +
                 "\nMaximum number of players: " + Long.toString(this.getMaxPlayers());
     }
+
 }
+

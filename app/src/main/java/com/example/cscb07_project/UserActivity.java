@@ -59,9 +59,8 @@ public class UserActivity extends AppCompatActivity implements com.example.cscb0
     }
 
     public void myEvents(View view) {
-        //change to jasons page
-//        Intent intent = new Intent(this, Registration.class);
-//        startActivity(intent);
+        Intent intent = new Intent(this, ViewUserEventsActivity.class);
+        startActivity(intent);
     }
 
     public void update(){

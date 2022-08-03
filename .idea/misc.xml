@@ -10,6 +10,8 @@
         <entry key="app/src/main/res/layout/events.xml" value="0.5764851888020834" />
         <entry key="app/src/main/res/layout/activity_user.xml" value="0.2875" />
         <entry key="app/src/main/res/layout/venueitem.xml" value="0.3573257446289063" />
+        <entry key="app/src/main/res/layout/activity_view_user_events.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item.xml" value="0.365625" />
       </map>
     </option>
   </component>

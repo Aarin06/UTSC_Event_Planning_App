@@ -20,6 +20,9 @@
             android:name=".UserActivity"
             android:exported="false" />
         <activity
+            android:name=".ViewUserEventsActivity"
+            android:exported="false" />
+        <activity
             android:name=".Registration"
             android:exported="false" />
         <activity
