@@ -102,8 +102,8 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
                 }
             });
             String key = "userID" + Long.toString(event.getNumPlayers()+1); // update newly added player and id
-            event.getEnrolledPlayers().put(key, "qJpHJLm3vvaI6qaSynYOHj4clus2");
-            databaseReference.child("Pan am").child(event.getEventID().trim()).child("enrolledPlayers").updateChildren(event.getEnrolledPlayers());
+            event.getEnrolledPlayers().add("qJpHJLm3vvaI6qaSynYOHj4clus2");
+            databaseReference.child("Pan am").child(event.getEventID().trim()).child("enrolledPlayers").setValue(event.getEnrolledPlayers());
         }
         else{
             Toast.makeText(context, "The current event is full", Toast.LENGTH_SHORT).show();

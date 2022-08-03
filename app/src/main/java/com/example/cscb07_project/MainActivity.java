@@ -79,9 +79,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             if (task.isSuccessful()) {
                                 String data = String.valueOf(task.getResult().child("status").getValue());
                                 int status = Integer.parseInt(data);
-                                SharedPreferences preferences = MainActivity.this.getPreferences(Context.MODE_PRIVATE);
-                                preferences.edit().putString("uID", uID);
-                                preferences.edit().apply();
+                                SharedPreferences p = getSharedPreferences("myprefs", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = p.edit();
+                                editor.putString("uID", uID);
+                                editor.apply();
                                 if (status == 0) {
                                     //To whoever is dealing with the user end of things, replace the line below
                                     //and redirect to a new activity.

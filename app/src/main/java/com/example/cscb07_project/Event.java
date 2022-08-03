@@ -2,6 +2,7 @@ package com.example.cscb07_project;
 
 import com.google.firebase.database.GenericTypeIndicator;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Event {
@@ -14,11 +15,11 @@ public class Event {
     String endTime;
     boolean eventApproved;
 
-    HashMap<String, Object> enrolledPlayers ;
+    ArrayList<String> enrolledPlayers ;
 
     public Event(){}
 
-    public Event(String eventID, String creatorID, long maxPlayers, long numPlayers, String eventName, String startTime, String endTime, boolean eventApproved, HashMap<String, Object> enrolledPlayers) {
+    public Event(String eventID, String creatorID, long maxPlayers, long numPlayers, String eventName, String startTime, String endTime, boolean eventApproved, ArrayList<String> enrolledPlayers) {
         this.eventID = eventID;
         this.creatorID = creatorID;
         this.maxPlayers = maxPlayers;
@@ -62,7 +63,7 @@ public class Event {
         this.eventApproved = eventApproved;
     }
 
-    public void setEnrolledPlayers(HashMap<String, Object> enrolledPlayers) {
+    public void setEnrolledPlayers(ArrayList<String> enrolledPlayers) {
         this.enrolledPlayers = enrolledPlayers;
     }
 
@@ -98,7 +99,7 @@ public class Event {
         return eventApproved;
     }
 
-    public HashMap<String, Object> getEnrolledPlayers() {
+    public ArrayList<String> getEnrolledPlayers() {
         return enrolledPlayers;
     }
 

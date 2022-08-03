@@ -3,10 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_events.xml" value="0.544573974609375" />
+        <entry key="app/src/main/res/layout/activity_events.xml" value="0.37442932128906264" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.32401428222656237" />
-        <entry key="app/src/main/res/layout/activity_registration.xml" value="0.4335678100585936" />
-        <entry key="app/src/main/res/layout/event_card.xml" value="0.34437408447265616" />
+        <entry key="app/src/main/res/layout/activity_registration.xml" value="0.33499145507812494" />
+        <entry key="app/src/main/res/layout/event_card.xml" value="0.4150543212890624" />
         <entry key="app/src/main/res/layout/events.xml" value="0.5764851888020834" />
       </map>
     </option>
