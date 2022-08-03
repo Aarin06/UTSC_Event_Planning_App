@@ -51,6 +51,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    public void startUserActivity(){
+        startActivity(new Intent(this,UserActivity.class));
+    }
+
     private void login() {
         String email = emailField.getText().toString().trim();
         String password = passwordField.getText().toString().trim();
@@ -88,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 if (status == 0) {
                                     //To whoever is dealing with the user end of things, replace the line below
                                     //and redirect to a new activity.
+                                    startUserActivity();
                                     Toast.makeText(MainActivity.this, "Logged in as user!", Toast.LENGTH_LONG).show();
                                 } else {
                                     //To whoever is dealing with the admin end of things, replace the line below
