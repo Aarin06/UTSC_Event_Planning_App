@@ -1,34 +1,30 @@
 package com.example.cscb07_project;
 
-import com.google.firebase.database.GenericTypeIndicator;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Event {
     String eventID;
     String creatorID;
-    long maxPlayers; //can hold up to
-    long numPlayers; //currently at
+    int maxPlayers; //can hold up to
+    int numPlayers; //currently at
     String eventName;
+    ArrayList<String> enrolledPlayers;
     String startTime; //java contains Date objects
     String endTime;
     boolean eventApproved;
 
-    ArrayList<String> enrolledPlayers ;
-
     public Event(){}
 
-    public Event(String eventID, String creatorID, long maxPlayers, long numPlayers, String eventName, String startTime, String endTime, boolean eventApproved, ArrayList<String> enrolledPlayers) {
+    public Event(String eventID, String creatorID, int maxPlayers, int numPlayers, String eventName, ArrayList<String> enrolledPlayers, String startTime, String endTime, boolean eventApproved) {
         this.eventID = eventID;
         this.creatorID = creatorID;
         this.maxPlayers = maxPlayers;
         this.numPlayers = numPlayers;
         this.eventName = eventName;
+        this.enrolledPlayers = enrolledPlayers;
         this.startTime = startTime;
         this.endTime = endTime;
         this.eventApproved = eventApproved;
-        this.enrolledPlayers = enrolledPlayers;
     }
 
     public void setEventID(String eventID) {
@@ -39,16 +35,20 @@ public class Event {
         this.creatorID = creatorID;
     }
 
-    public void setMaxPlayers(long maxPlayers) {
+    public void setMaxPlayers(int maxPlayers) {
         this.maxPlayers = maxPlayers;
     }
 
-    public void setNumPlayers(long numPlayers) {
+    public void setNumPlayers(int numPlayers) {
         this.numPlayers = numPlayers;
     }
 
     public void setEventName(String eventName) {
         this.eventName = eventName;
+    }
+
+    public void setEnrolledPlayers(ArrayList<String> enrolledPlayers) {
+        this.enrolledPlayers = enrolledPlayers;
     }
 
     public void setStartTime(String startTime) {
@@ -63,10 +63,6 @@ public class Event {
         this.eventApproved = eventApproved;
     }
 
-    public void setEnrolledPlayers(ArrayList<String> enrolledPlayers) {
-        this.enrolledPlayers = enrolledPlayers;
-    }
-
     public String getEventID() {
         return eventID;
     }
@@ -75,16 +71,20 @@ public class Event {
         return creatorID;
     }
 
-    public long getMaxPlayers() {
+    public int getMaxPlayers() {
         return maxPlayers;
     }
 
-    public long getNumPlayers() {
+    public int getNumPlayers() {
         return numPlayers;
     }
 
     public String getEventName() {
         return eventName;
+    }
+
+    public ArrayList<String> getEnrolledPlayers() {
+        return enrolledPlayers;
     }
 
     public String getStartTime() {
@@ -99,10 +99,6 @@ public class Event {
         return eventApproved;
     }
 
-    public ArrayList<String> getEnrolledPlayers() {
-        return enrolledPlayers;
-    }
-
     @Override
     public String toString(){
         return this.getEventName() + "" +
@@ -111,6 +107,4 @@ public class Event {
                 "\nCurrent number of players: " + Long.toString(this.getNumPlayers()) +
                 "\nMaximum number of players: " + Long.toString(this.getMaxPlayers());
     }
-
-
 }

@@ -55,7 +55,7 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
 //        join_event.setOnClickListener(this);
 
         recyclerView = findViewById(R.id.event_list);
-        database = FirebaseDatabase.getInstance().getReference("Venue");
+        database = FirebaseDatabase.getInstance().getReference("Venues");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -63,13 +63,16 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
         myAdapter = new EventListAdapter(this,list);
         recyclerView.setAdapter(myAdapter);
 // add venue once passed in !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        database.child("Pan am").addValueEventListener(new ValueEventListener() {
+        Intent intent = getIntent();
+        String venue_name = intent.getStringExtra(UserActivity.VENUE);
+        System.out.println("lmao " + venue_name);
+        database.child(venue_name).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){ //adding all events to the list
+                for (DataSnapshot dataSnapshot : snapshot.child("eventsList").getChildren()){ //adding all events to the list
                     Event event = dataSnapshot.getValue(Event.class);
-                    System.out.println("lmao " + event.getEnrolledPlayers().get("userID1")); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    System.out.println("lmao " + event.getEnrolledPlayers().get(0)); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     list.add(event);
                 }
                 myAdapter.notifyDataSetChanged();
