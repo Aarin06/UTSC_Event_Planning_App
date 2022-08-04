@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateNewEvent">
+
+
+    <Spinner
+        android:id="@+id/eMin"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="320dp"
+        android:background="#ECE7E7"
+        app:layout_constraintEnd_toStartOf="@+id/eAmPm"
+        app:layout_constraintStart_toEndOf="@+id/eHour"
+        app:layout_constraintTop_toBottomOf="@+id/eventName" />
+
+    <Spinner
+        android:id="@+id/eAmPm"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="320dp"
+        android:layout_marginEnd="35dp"
+        android:background="#ECE7E7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventName" />
+
+    <Spinner
+        android:id="@+id/eHour"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="320dp"
+        android:background="#ECE7E7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventName" />
+
+    <Spinner
+        android:id="@+id/month"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="120dp"
+        android:background="#ECE7E7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventName" />
+
+    <Spinner
+        android:id="@+id/sAmPm"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="220dp"
+        android:layout_marginEnd="35dp"
+        android:background="#ECE7E7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventName" />
+
+    <TextView
+        android:id="@+id/EndTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="20dp"
+        android:text="End Time"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sHour" />
+
+    <TextView
+        android:id="@+id/StartTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="20dp"
+        android:text="Start Time"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/month" />
+
+    <EditText
+        android:id="@+id/eventName"
+        android:layout_width="322dp"
+        android:layout_height="50dp"
+
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="35dp"
+        android:background="#ECE7E7"
+        android:ems="10"
+        android:hint="Event Name"
+        android:maxLength="30"
+        android:paddingLeft="20dp"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <EditText
+        android:id="@+id/maxPlay"
+        android:layout_width="322dp"
+        android:layout_height="50dp"
+
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="35dp"
+        android:background="#ECE7E7"
+        android:hint="Max Players"
+        android:inputType="number"
+        android:maxLength="2"
+        android:maxLines="1"
+        android:paddingLeft="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventName" />
+
+    //app:layout_constraintTop_toBottomOf="@+id/eMin"
+
+    <Button
+        android:id="@+id/eventBtn"
+        android:layout_width="360dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="70dp"
+        android:backgroundTint="@color/purple_500"
+        android:onClick="callScheduledEventsScreen"
+        android:text="Add Event"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eMin" />
+
+    <EditText
+        android:id="@+id/year"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="35dp"
+        android:background="#ECE7E7"
+        android:hint="Year"
+        android:inputType="datetime"
+        android:paddingLeft="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventName" />
+
+    <EditText
+        android:id="@+id/day"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+
+        android:layout_marginTop="120dp"
+        android:background="#ECE7E7"
+        android:hint="Day"
+        android:inputType="datetime"
+        android:paddingLeft="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/year"
+        app:layout_constraintStart_toEndOf="@+id/month"
+        app:layout_constraintTop_toBottomOf="@+id/eventName" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginEnd="125dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="Create Event"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/DateTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="20dp"
+        android:text="Date"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/maxPlay" />
+
+    <Spinner
+        android:id="@+id/sHour"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="220dp"
+        android:background="#ECE7E7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventName" />
+
+    <Spinner
+        android:id="@+id/sMin"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="220dp"
+        android:background="#ECE7E7"
+        app:layout_constraintEnd_toStartOf="@+id/sAmPm"
+        app:layout_constraintStart_toEndOf="@+id/sHour"
+        app:layout_constraintTop_toBottomOf="@+id/eventName" />
+
+    <!--    <Spinner-->
+<!--        android:id="@+id/sAmPm"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginTop="220dp"-->
+<!--        android:layout_marginEnd="35dp"-->
+<!--        android:background="#ECE7E7"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/eventName"-->
+<!--        tools:ignore="SpeakableTextPresentCheck" />-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,30 +6,30 @@ import java.util.ArrayList;
 public class Event {
     String eventID;
     String creatorID;
-    int maxPlayers; //can hold up to
-    int numPlayers; //currently at
-    String eventName;
+    int maxPlayers; //can hold up to  //
+    int numPlayers; //currently at  //
+    String eventName;  //
     ArrayList<String> enrolledPlayers;
-
-    String startTime; //java contains Date objects
-    String endTime;
+    String startTime; //java contains Date objects  //
+    String endTime; //
+    String date;    //
     boolean eventApproved;
 
 
     public Event(){}
 
-    public Event(String eventID, String creatorID, int maxPlayers, int numPlayers, String eventName, ArrayList<String> enrolledPlayers, String startTime, String endTime, boolean eventApproved) {
+    public Event(String eventID, String creatorID, int maxPlayers, int numPlayers, String eventName, ArrayList<String> enrolledPlayers, String startTime, String endTime, boolean eventApproved, String date) {
 
         this.eventID = eventID;
         this.creatorID = creatorID;
         this.maxPlayers = maxPlayers;
         this.numPlayers = numPlayers;
         this.eventName = eventName;
-
         this.enrolledPlayers = enrolledPlayers;
         this.startTime = startTime;
         this.endTime = endTime;
         this.eventApproved = eventApproved;
+        this.date = date;
 
     }
 
@@ -66,6 +66,10 @@ public class Event {
         this.endTime = endTime;
     }
 
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public void setEventApproved(boolean eventApproved) {
         this.eventApproved = eventApproved;
     }
@@ -73,6 +77,10 @@ public class Event {
 
     public String getEventID() {
         return eventID;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public String getCreatorID() {
