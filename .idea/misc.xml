@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Jason Su/Documents/Projects/CSCB07_Project/app/src/main/res/layout/activity_create_new_event.xml" value="0.25226449275362317" />
+        <entry key="..\:/Users/Jason Su/Documents/Projects/CSCB07_Project/app/src/main/res/layout/item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_create_new_event.xml" value="0.399492459683805" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24864864864864866" />
         <entry key="app/src/main/res/layout/activity_new_event.xml" value="0.2882882882882883" />

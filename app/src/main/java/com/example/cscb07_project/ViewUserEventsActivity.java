@@ -85,7 +85,7 @@ public class ViewUserEventsActivity extends AppCompatActivity {
                     return;
                 }
                 // Otherwise.
-                ViewUserEventsActivity.this.user = task.getResult().getValue(User.class);
+                ViewUserEventsActivity.this.user = new User(task);
                 // After user object is populated, start the listener.
                 ViewUserEventsActivity.this.startListener();
             }
@@ -143,21 +143,39 @@ public class ViewUserEventsActivity extends AppCompatActivity {
                     return;
                 }
                 // Otherwise.
-                ViewUserEventsActivity.this.user = task.getResult().getValue(User.class);
+                ViewUserEventsActivity.this.user = new User(task);
+                // Creating the views.
+                // Created Events.
+                created.setHasFixedSize(true);
+                created.setLayoutManager(new LinearLayoutManager(ViewUserEventsActivity.this, LinearLayoutManager.HORIZONTAL, false));
+                // Joined Events.
+                joined.setHasFixedSize(true);
+                joined.setLayoutManager(new LinearLayoutManager(ViewUserEventsActivity.this, LinearLayoutManager.HORIZONTAL, false));
+                fire.child("Venues").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        ArrayList<Event> createdEvents = new ArrayList<Event>();
+                        ArrayList<Event> joinedEvents = new ArrayList<Event>();
+                        // Looping through joined events.
+                        for (String eID : ViewUserEventsActivity.this.user.getEventsJoined()) {
+                            Event e = new Event(task, eID);
+                            System.out.println(e.toString());
+                            if (!(e.getEventID().equals("N/A"))) joinedEvents.add(e);
+                        }
+                        // Looping through created events.
+                        for (String eID : ViewUserEventsActivity.this.user.getEventsCreated()) {
+                            Event e = new Event(task, eID);
+                            if (!(e.getEventID().equals("N/A"))) createdEvents.add(e);
+                        }
+                        // Adapters.
+                        adapterJoined = new EventsRecyclerAdapter(ViewUserEventsActivity.this, joinedEvents, "Pan Am Sports Centre");
+                        adapterCreated = new EventsRecyclerAdapter(ViewUserEventsActivity.this, createdEvents, "Pan Am Sports Centre");
+                        // Setting the adapters.
+                        created.setAdapter(adapterCreated);
+                        joined.setAdapter(adapterJoined);
+                    }
+                });
             }
         });
-        // Creating the views.
-        // Created Events.
-        created.setHasFixedSize(true);
-        created.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        // Joined Events.
-        joined.setHasFixedSize(true);
-        joined.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        // Adapters.
-        adapterJoined = new EventsRecyclerAdapter(this, user.getEventsJoined(), "Pan Am Sports Centre");
-        adapterCreated = new EventsRecyclerAdapter(this, user.getEventsCreated(), "Pan Am Sports Centre");
-        // Setting the adapters.
-        created.setAdapter(adapterCreated);
-        joined.setAdapter(adapterJoined);
     }
 }

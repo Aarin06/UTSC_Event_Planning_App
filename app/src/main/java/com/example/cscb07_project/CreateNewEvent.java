@@ -135,7 +135,7 @@ public class CreateNewEvent extends AppCompatActivity {
                 databaseReference.child(e.eventID).setValue(e.eventID);
                 databaseReference = db.getReference("Users").child(creatorID).child("eventsJoined");
                 databaseReference.child(e.eventID).setValue(e.eventID);
-               // scheduled();
+                scheduled();
             }
         });
 
