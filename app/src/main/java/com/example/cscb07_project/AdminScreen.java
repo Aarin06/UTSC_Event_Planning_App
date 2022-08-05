@@ -39,11 +39,21 @@ public class AdminScreen extends AppCompatActivity{
 
         fire = FirebaseDatabase.getInstance().getReference("Venues");
 
-        //Set up button
-        Button button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
+        //Set up enter button
+        Button enterButton = (Button) findViewById(R.id.button);
+        enterButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 enter();
+            }
+        });
+
+        //Set up add venue button
+        Button addVenueButton = (Button) findViewById(R.id.button2);
+        addVenueButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                //Cat add code here to go to other activity or do whatever you need to do
+
             }
         });
 
@@ -83,7 +93,7 @@ public class AdminScreen extends AppCompatActivity{
         for (String s: venueNames) {
 
             if (s.equals(currText)) {
-
+                
                 Intent i = new Intent(this, AdminVenue.class);
                 i.putExtra("venue", s);
 
