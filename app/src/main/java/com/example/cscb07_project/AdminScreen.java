@@ -93,7 +93,7 @@ public class AdminScreen extends AppCompatActivity{
         for (String s: venueNames) {
 
             if (s.equals(currText)) {
-                
+
                 Intent i = new Intent(this, AdminVenue.class);
                 i.putExtra("venue", s);
 
