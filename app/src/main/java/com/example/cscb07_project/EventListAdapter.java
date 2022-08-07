@@ -122,10 +122,10 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
                         System.out.println("IT IS NLULL");
                     }
                     System.out.println("IT IS " + user.getEventsJoined().values());
-                    if (user.getEventsJoined().containsKey(event.getEventID().trim())){
+                    if (user.getEventsJoined().containsKey(event.getEventID().trim())){ // check if joined event
                         Toast.makeText(context, "You have already joined this event", Toast.LENGTH_SHORT).show();
                         return;
-                    }else{
+                    }else{ // if not add event to enrolled list
                         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
                         databaseReference.child(user_name).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                             @Override
