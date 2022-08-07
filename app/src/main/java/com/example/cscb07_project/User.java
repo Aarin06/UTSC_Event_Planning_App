@@ -17,8 +17,8 @@ public class User extends Account {
     private String userID;
     private int status;
     // Lists of events.
-    private ArrayList<String> eventsCreated;
-    private ArrayList<String> eventsJoined;
+    private HashMap<String, Object> eventsCreated;
+    private HashMap<String, Object> eventsJoined;
 
     private User() {}
 
@@ -34,18 +34,18 @@ public class User extends Account {
         User.this.email = res.child("email").getValue().toString();
         // Filling up the lists.
         // Created events.
-        User.this.eventsCreated = new ArrayList<String>();
+        User.this.eventsCreated = new HashMap<String, Object>();
         DataSnapshot events = res.child("eventsCreated");
         if (events.exists()) {
             // Loop through all events and add them to the list.
-            for (DataSnapshot e : events.getChildren()) User.this.eventsCreated.add(e.getKey());
+            for (DataSnapshot e : events.getChildren()) User.this.eventsCreated.put(e.getKey(), e.getValue());
         }
         // Joined events.
-        User.this.eventsJoined = new ArrayList<String>();
+        User.this.eventsJoined = new HashMap<String, Object>();
         events = res.child("eventsCreated");
         if (events.exists()) {
             // Loop through all events and add them to the list.
-            for (DataSnapshot e : events.getChildren()) User.this.eventsJoined.add(e.getKey());
+            for (DataSnapshot e : events.getChildren()) User.this.eventsJoined.put(e.getKey(), e.getValue());
         }
         // The rest of the fields.
         User.this.name = res.child("name").getValue().toString();
@@ -70,10 +70,10 @@ public class User extends Account {
     public String getUserID() {
         return userID;
     }
-    public ArrayList<String> getEventsCreated() {
+    public HashMap<String, Object> getEventsCreated() {
         return eventsCreated;
     }
-    public ArrayList<String> getEventsJoined() {
+    public HashMap<String, Object> getEventsJoined() {
         return eventsJoined;
     }
 
@@ -96,9 +96,9 @@ public class User extends Account {
                 "Email: " + this.getEmail() + "\n" +
                 "Admin: " + this.status + "\n" +
                 "Events Created: ";
-        for (String e : this.getEventsCreated()) result += e + " ";
+        for (Object e : this.getEventsCreated().values()) result += (String) e + " ";
         result += "\nEvents Joined: ";
-        for (String e : this.getEventsJoined()) result += e + " ";
+        for (Object e : this.getEventsJoined().values()) result += (String) e + " ";
         result += "\n==========================\n";
         return result;
     }
