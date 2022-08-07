@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">CSCB07_Project</string>
+
+    <string name="event_page_title">Events Page</string>
+    <string name="join_event">Join Event</string>
+    <string name="selete_event">Select Event</string>
+
+
     <string name="edit_email">Email Address</string>
     <string name="edit_pw">Password</string>
     <string name="button_login">Login</string>
@@ -11,4 +17,6 @@
     </string-array>
     <string name="button_register">Register</string>
     <string name="text_back">Back</string>
+    <string name="event_list">Event List</string>
+
 </resources>
