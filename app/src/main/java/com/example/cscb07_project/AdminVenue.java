@@ -12,6 +12,7 @@ import com.google.firebase.database.DatabaseReference;
 
 public class AdminVenue extends AppCompatActivity {
 
+    String venueID;
     String venueName;
     private DatabaseReference fire;
 
@@ -23,7 +24,8 @@ public class AdminVenue extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        venueName = intent.getStringExtra("venue");
+        venueID = intent.getStringExtra("venue");
+        venueName = intent.getStringExtra("venueName");
 
         TextView tv = findViewById(R.id.textView3);
 
@@ -35,7 +37,7 @@ public class AdminVenue extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent i = new Intent(AdminVenue.this, ApproveEvents.class);
-                i.putExtra("venue", venueName);
+                i.putExtra("venue", venueID);
 
                 startActivity(i);
 
