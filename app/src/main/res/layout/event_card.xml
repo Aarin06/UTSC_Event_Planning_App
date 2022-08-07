@@ -7,13 +7,6 @@
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp">
 
-    <Button
-        android:id="@+id/join_event"
-        android:layout_marginStart="180dp"
-        android:layout_width="195dp"
-        android:layout_height="wrap_content"
-        android:text="@string/join_event" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:text="Event: "
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -41,7 +34,7 @@
                 android:layout_marginLeft="8dp"
                 android:text="Volleyball"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -56,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:text="Created by:"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -64,9 +57,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:text="Joe"
+                android:text="joe"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -81,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:text="Start time:"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -91,7 +84,7 @@
                 android:layout_marginLeft="8dp"
                 android:text="3:40"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -100,7 +93,7 @@
                 android:layout_weight="1"
                 android:text="End time:"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -111,7 +104,7 @@
                 android:layout_weight="1"
                 android:text="18"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -126,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:text="Current number of players:"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -137,7 +130,7 @@
                 android:layout_weight="1"
                 android:text="5"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -152,7 +145,7 @@
                 android:layout_height="wrap_content"
                 android:text="Max number of players:"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -163,9 +156,16 @@
                 android:layout_weight="1"
                 android:text="12"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/join_event"
+            android:layout_width="352dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/join_event" />
 
 
     </LinearLayout>

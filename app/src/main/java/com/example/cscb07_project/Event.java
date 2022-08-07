@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class Event {
     String eventID;
     String creatorID;
+    String venueName;
     int maxPlayers; //can hold up to  //
     int numPlayers; //currently at  //
     String eventName;  //
@@ -77,6 +78,8 @@ public class Event {
         this.creatorID = creatorID;
     }
 
+    public void setVenueName(String venueName) {this.venueName = venueName;}
+
     public void setMaxPlayers(int maxPlayers) {
         this.maxPlayers = maxPlayers;
     }
@@ -115,12 +118,14 @@ public class Event {
         return eventID;
     }
 
-    public String getDate() {
-        return date;
-    }
-
     public String getCreatorID() {
         return creatorID;
+    }
+
+    public String getVenueName() {return venueName;}
+
+    public String getDate() {
+        return date;
     }
 
     public int getMaxPlayers() {

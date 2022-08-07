@@ -3,16 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Jason Su/Documents/Projects/CSCB07_Project/app/src/main/res/layout/activity_create_new_event.xml" value="0.25226449275362317" />
-        <entry key="..\:/Users/Jason Su/Documents/Projects/CSCB07_Project/app/src/main/res/layout/item.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_create_new_event.xml" value="0.399492459683805" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.24864864864864866" />
-        <entry key="app/src/main/res/layout/activity_new_event.xml" value="0.2882882882882883" />
-        <entry key="app/src/main/res/layout/activity_registration.xml" value="0.3602859497070311" />
-        <entry key="app/src/main/res/layout/activity_test.xml" value="0.2882882882882883" />
+        <entry key="app/src/main/res/layout/activity_events.xml" value="0.37442932128906264" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.32401428222656237" />
+        <entry key="app/src/main/res/layout/activity_registration.xml" value="0.33499145507812494" />
+        <entry key="app/src/main/res/layout/activity_test.xml" value="0.20833333333333334" />
         <entry key="app/src/main/res/layout/activity_user.xml" value="0.2875" />
-        <entry key="app/src/main/res/layout/activity_view_user_events.xml" value="0.1972972972972973" />
-        <entry key="app/src/main/res/layout/event_card.xml" value="0.1972972972972973" />
+        <entry key="app/src/main/res/layout/activity_view_user_events.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/event_card.xml" value="0.38735351562500003" />
+        <entry key="app/src/main/res/layout/events.xml" value="0.5764851888020834" />
+        <entry key="app/src/main/res/layout/item.xml" value="0.365625" />
         <entry key="app/src/main/res/layout/venueitem.xml" value="0.3573257446289063" />
       </map>
     </option>
@@ -22,12 +21,5 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.35656701165276605" />
-      </ProjectState>
-    </option>
   </component>
 </project>

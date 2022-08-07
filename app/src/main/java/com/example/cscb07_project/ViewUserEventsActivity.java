@@ -157,14 +157,14 @@ public class ViewUserEventsActivity extends AppCompatActivity {
                         ArrayList<Event> createdEvents = new ArrayList<Event>();
                         ArrayList<Event> joinedEvents = new ArrayList<Event>();
                         // Looping through joined events.
-                        for (String eID : ViewUserEventsActivity.this.user.getEventsJoined()) {
-                            Event e = new Event(task, eID);
+                        for (Object eID : ViewUserEventsActivity.this.user.getEventsJoined().values()) {
+                            Event e = new Event(task, (String) eID);
                             System.out.println(e.toString());
                             if (!(e.getEventID().equals("N/A"))) joinedEvents.add(e);
                         }
                         // Looping through created events.
-                        for (String eID : ViewUserEventsActivity.this.user.getEventsCreated()) {
-                            Event e = new Event(task, eID);
+                        for (Object eID : ViewUserEventsActivity.this.user.getEventsCreated().values()) {
+                            Event e = new Event(task, (String) eID);
                             if (!(e.getEventID().equals("N/A"))) createdEvents.add(e);
                         }
                         // Adapters.

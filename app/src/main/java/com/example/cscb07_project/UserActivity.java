@@ -48,6 +48,7 @@ public class UserActivity extends AppCompatActivity implements com.example.cscb0
         Venue v = vlist.get(position);
 
         Intent intent = new Intent(this,EventsActivity.class);
+        System.out.println("The name is " + v.name);
         intent.putExtra(VENUE, v.name);
 
         startActivity(intent);
