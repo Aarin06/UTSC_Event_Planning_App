@@ -106,6 +106,7 @@ public class AdminScreen extends AppCompatActivity implements com.example.cscb07
                 int numPlayers = Integer.parseInt(dataSnapshot1.child("numPlayers").getValue().toString());
                 String startTime = dataSnapshot1.child("startTime").getValue().toString();
                 String endTime = dataSnapshot1.child("endTime").getValue().toString();
+                String date = dataSnapshot1.child("date").getValue().toString();
                 boolean eventApproved = Boolean.parseBoolean(dataSnapshot1.child("eventApproved").getValue().toString());
 
                 ArrayList<String> enrolledPlayers = new ArrayList<>();
@@ -116,7 +117,7 @@ public class AdminScreen extends AppCompatActivity implements com.example.cscb07
                         enrolledPlayers.add(player);
                     }
                 }
-                Event e = new Event(eventID, creator1ID, maxPlayers, numPlayers, eventName ,enrolledPlayers, startTime, endTime, eventApproved);
+                Event e = new Event(eventID, creator1ID, maxPlayers, numPlayers, eventName ,enrolledPlayers, startTime, endTime, eventApproved, date);
             }
         }
         ArrayList<String> sportsOffered = new ArrayList<>();
