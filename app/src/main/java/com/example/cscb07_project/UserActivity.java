@@ -36,7 +36,7 @@ public class UserActivity extends AppCompatActivity implements com.example.cscb0
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         vlist = new ArrayList<>();
-        venueAdapter = new venueAdapter(this,vlist,this);
+        venueAdapter = new venueAdapter(this,vlist,this, true);
         recyclerView.setAdapter(venueAdapter);
         update();
 
@@ -55,6 +55,7 @@ public class UserActivity extends AppCompatActivity implements com.example.cscb0
 
     public void goHome(View view) {
         Intent intent = new Intent(this, UserActivity.class);
+        finish();
         startActivity(intent);
     }
 

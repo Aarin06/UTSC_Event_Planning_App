@@ -139,7 +139,7 @@ public class AdminScreen extends AppCompatActivity implements com.example.cscb07
         llm = new LinearLayoutManager(this);
         llm.setOrientation(RecyclerView.VERTICAL);
         rv.setLayoutManager(llm);
-        adapater = new venueAdapter(this, venues, this);
+        adapater = new venueAdapter(this, venues, this, false);
         rv.setAdapter(adapater);
 
     }

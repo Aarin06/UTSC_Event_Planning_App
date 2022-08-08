@@ -177,5 +177,18 @@ public class ViewUserEventsActivity extends AppCompatActivity {
                 });
             }
         });
+
+
+    }
+
+    public void goHome(View view) {
+        Intent intent = new Intent(this, UserActivity.class);
+        startActivity(intent);
+    }
+
+    public void myEvents(View view) {
+        Intent intent = new Intent(this, ViewUserEventsActivity.class);
+        finish();
+        startActivity(intent);
     }
 }
