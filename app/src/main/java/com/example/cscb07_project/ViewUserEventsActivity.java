@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -157,19 +158,33 @@ public class ViewUserEventsActivity extends AppCompatActivity {
                         ArrayList<Event> createdEvents = new ArrayList<Event>();
                         ArrayList<Event> joinedEvents = new ArrayList<Event>();
                         // Looping through joined events.
-                        for (Object eID : ViewUserEventsActivity.this.user.getEventsJoined().values()) {
+                        HashMap<String, Object> h1 = new HashMap<String, Object>(ViewUserEventsActivity.this.user.getEventsJoined());
+                        for (Object eID : h1.values()) {
                             Event e = new Event(task, (String) eID);
                             System.out.println(e.toString());
-                            if (!(e.getEventID().equals("N/A"))) joinedEvents.add(e);
+                            if (e.getEventID().equals("N/A")) {
+                                ViewUserEventsActivity.this.user.removeJoined((String) eID);
+                                continue;
+                            }
+                            joinedEvents.add(e);
                         }
                         // Looping through created events.
-                        for (Object eID : ViewUserEventsActivity.this.user.getEventsCreated().values()) {
+                        HashMap<String, Object> h2 = new HashMap<String, Object>(ViewUserEventsActivity.this.user.getEventsCreated());
+                        for (Object eID : h2.values()) {
                             Event e = new Event(task, (String) eID);
-                            if (!(e.getEventID().equals("N/A"))) createdEvents.add(e);
+                            if (e.getEventID().equals("N/A")) {
+                                ViewUserEventsActivity.this.user.removeCreated((String) eID);
+                                continue;
+                            }
+                            createdEvents.add(e);
                         }
+                        // Writing the new lists to the database.
+                        User user = ViewUserEventsActivity.this.user;
+                        fire.child("Users").child(user.getUserID()).child("eventsCreated").setValue(user.getEventsCreated());
+                        fire.child("Users").child(user.getUserID()).child("eventsJoined").setValue(user.getEventsJoined());
                         // Adapters.
-                        adapterJoined = new EventsRecyclerAdapter(ViewUserEventsActivity.this, joinedEvents, "Pan Am Sports Centre");
-                        adapterCreated = new EventsRecyclerAdapter(ViewUserEventsActivity.this, createdEvents, "Pan Am Sports Centre");
+                        adapterJoined = new EventsRecyclerAdapter(ViewUserEventsActivity.this, joinedEvents);
+                        adapterCreated = new EventsRecyclerAdapter(ViewUserEventsActivity.this, createdEvents);
                         // Setting the adapters.
                         created.setAdapter(adapterCreated);
                         joined.setAdapter(adapterJoined);
@@ -177,8 +192,6 @@ public class ViewUserEventsActivity extends AppCompatActivity {
                 });
             }
         });
-
-
     }
 
     public void goHome(View view) {

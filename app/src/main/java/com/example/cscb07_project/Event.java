@@ -21,6 +21,7 @@ public class Event {
     String startTime; //java contains Date objects  //
     String endTime; //
     String date;    //
+    String venueName;
     boolean eventApproved;
 
     public Event(){}
@@ -42,6 +43,7 @@ public class Event {
             this.maxPlayers = Integer.parseInt(event.child("maxPlayers").getValue().toString());
             this.numPlayers = Integer.parseInt(event.child("numPlayers").getValue().toString());
             this.startTime = event.child("startTime").getValue().toString();
+            this.venueName = data.child("name").getValue().toString();
             // Making the list for enrolled players.
             this.enrolledPlayers = new ArrayList<String>();
             for (long i = 0; i < event.child("enrolledPlayers").getChildrenCount(); i++) {

@@ -77,6 +77,16 @@ public class User extends Account {
         return eventsJoined;
     }
 
+    // Methods to remove an element from the HashMaps.
+    public void removeJoined(String eID) {
+        if(!this.eventsJoined.containsKey(eID)) return;
+        this.eventsJoined.remove(eID);
+    }
+    public void removeCreated(String eID) {
+        if(!this.eventsCreated.containsKey(eID)) return;
+        this.eventsCreated.remove(eID);
+    }
+
     public void requestEvent (){
     }
     public boolean joinEvent(){
