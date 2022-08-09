@@ -152,8 +152,8 @@
 
             <TextView
                 android:id="@+id/id_displaySportsOffered"
-                android:layout_width="391dp"
-                android:layout_height="83dp"
+                android:layout_width="382dp"
+                android:layout_height="67dp"
                 android:text="                     "
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

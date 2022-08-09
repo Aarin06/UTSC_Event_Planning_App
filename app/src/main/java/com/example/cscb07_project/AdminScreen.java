@@ -35,8 +35,6 @@ public class AdminScreen extends AppCompatActivity implements com.example.cscb07
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_screen);
 

@@ -22,13 +22,12 @@ public class AdminVenue extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_venue);
 
+        //Retrieve venue passed by id from AdminScreen
         Intent intent = getIntent();
-
         venueID = intent.getStringExtra("venue");
         venueName = intent.getStringExtra("venueName");
 
         TextView tv = findViewById(R.id.textView3);
-
         tv.setText(venueName);
 
         //Set up approve events button
