@@ -68,6 +68,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
         Event event = list.get(position);
         holder.event_name.setText(event.getEventName());
         setCreatorName(holder, event);
+        holder.date.setText(event.getDate().replace('_', ' '));
         holder.start_time.setText(event.getStartTime());
         holder.end_time.setText(event.getEndTime());
         holder.cur_players.setText(Long.toString(event.getNumPlayers()));
@@ -91,7 +92,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView event_name, creator, start_time, end_time, cur_players, max_players;
+        TextView event_name, creator, date, start_time, end_time, cur_players, max_players;
         Button join_event;
         Event event;
         public ViewHolder(@NonNull View itemView) {
@@ -99,6 +100,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
 
             event_name = itemView.findViewById(R.id.event_name);
             creator = itemView.findViewById(R.id.creator);
+            date = itemView.findViewById(R.id.date);
             start_time = itemView.findViewById(R.id.start_time);
             end_time = itemView.findViewById(R.id.end_time);
             cur_players = itemView.findViewById(R.id.cur_players);
@@ -117,11 +119,6 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                     User user = new User(task);
-                    System.out.println("IMSURE THIS IS IT " + event.getEventID().trim());
-                    if (user.getEventsJoined() == null){
-                        System.out.println("IT IS NLULL");
-                    }
-                    System.out.println("IT IS " + user.getEventsJoined().values());
                     if (user.getEventsJoined().containsKey(event.getEventID().trim())){ // check if joined event
                         Toast.makeText(context, "You have already joined this event", Toast.LENGTH_SHORT).show();
                         return;
@@ -131,9 +128,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
                             @Override
                             public void onComplete(@NonNull Task<DataSnapshot> task) {
                                 User user = new User(task);
-                                System.out.println("2IT IS " + user.getName());
-                                user.getEventsJoined().put(event.getEventID(), event.getEventID());
-                                System.out.println("2IT IS " + user.getEventsJoined().values());
+                                user.getEventsJoined().put(event.getEventID(), event.getEventID()); // add event to events joined of the user
                                 DatabaseReference df = FirebaseDatabase.getInstance().getReference("Users").child(user_name).child("eventsJoined");
                                 df.updateChildren(user.getEventsJoined());
                             }
@@ -141,26 +136,22 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
 
                         // change current player count + 1
                         HashMap eventData = new HashMap();
-                        System.out.println("YES " + event.getNumPlayers());
                         eventData.put("numPlayers", event.getNumPlayers() + 1); // update number of current players
                         databaseReference = FirebaseDatabase.getInstance().getReference("Venues")
                                 .child(venue_name).child("eventList").child(event.getEventID().trim());
-
-                        // add venue once passed in !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                         databaseReference.updateChildren(eventData).addOnCompleteListener(new OnCompleteListener() {
                             @Override
                             public void onComplete(@NonNull Task task) {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(context, "Successfully joined event", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    System.out.println("Something went wrong");
+                                    Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
 
                         // add player to the enrolled list
                         event.getEnrolledPlayers().add(user_name);
-                        System.out.println("The user to add is " + user_name);
                         databaseReference.child("enrolledPlayers").setValue(event.getEnrolledPlayers());
                     }
 

@@ -16,8 +16,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cscb07_project.databinding.ActivityCreateNewEventBinding;
-import com.example.cscb07_project.databinding.ActivityMainBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -34,7 +32,6 @@ import java.util.Date;
 
 public class CreateNewEvent extends AppCompatActivity {
     public static final String VENUE = "com.example.cscb07_project.VENUE_ID";
-    ActivityCreateNewEventBinding binding;
     DatabaseReference databaseReference;
     FirebaseDatabase db;
 

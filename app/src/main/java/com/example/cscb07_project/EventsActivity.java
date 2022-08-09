@@ -56,19 +56,19 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
 
         list = new ArrayList<>();
         SharedPreferences p = getSharedPreferences("myprefs", Context.MODE_PRIVATE);
-        //should be event.venue_name!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        myAdapter = new EventListAdapter(this,list, p.getString("uID", "N/A"), "Panam123");
-        recyclerView.setAdapter(myAdapter);
-// add venue once passed in !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         Intent intent = getIntent();
-        String venue_name = intent.getStringExtra(UserActivity.VENUE);
-        database.child("Panam123").addValueEventListener(new ValueEventListener() {
+        String venueID = intent.getStringExtra(UserActivity.VENUE);
+        myAdapter = new EventListAdapter(this,list, p.getString("uID", "N/A"), venueID);
+        recyclerView.setAdapter(myAdapter);
+        database.child(venueID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
                 for (DataSnapshot dataSnapshot : snapshot.child("eventList").getChildren()){ //adding all events to the list
                     Event event = dataSnapshot.getValue(Event.class);
-                    list.add(event);
+                    if (event.eventApproved == true){
+                        list.add(event);
+                    }
                 }
                 myAdapter.notifyDataSetChanged();
             }
@@ -88,41 +88,6 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.event_page_back:
                 startActivity(new Intent(this, UserActivity.class));
                 break;
-//            case R.id.join_event:
-//                joinEvent();
-//                readData();
-//                break;
         }
     }
-
-//    private void readData(){
-//        ref = FirebaseDatabase.getInstance().getReference("Venue"); // get reference to Venue node
-//        // Here we need to pass in the venue selected so that it can show all events within this venue. For now it is Pan am
-//        ref.child("Pan am").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                    Event event = snapshot.getValue(Event.class);
-//                    events_list.add(event);
-//                    System.out.println(event.eventID);
-//                    System.out.println(event.startTime);
-//                }
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Toast.makeText(EventsActivity.this, "Failed to read data", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//    }
-
-//    @Override
-//    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//        event_selected = adapterView.getItemAtPosition(i).toString();
-//    }
-//
-//    @Override
-//    public void onNothingSelected(AdapterView<?> adapterView) {
-//        join_event.setError("Please select an event from the list below");
-//    }
 }
