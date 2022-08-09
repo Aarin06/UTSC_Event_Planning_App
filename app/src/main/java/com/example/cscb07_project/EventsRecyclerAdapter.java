@@ -1,6 +1,7 @@
 package com.example.cscb07_project;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,11 @@ public class EventsRecyclerAdapter extends RecyclerView.Adapter<EventsRecyclerAd
         holder.endTime.setText(e.getEndTime());
         // Setting the eventID.
         holder.eventID = e.getEventID();
+        // Changing the Button text.
+        if (e.isEventApproved()) {
+            holder.statusView.setText("Approved");
+            holder.statusView.setBackgroundColor(Color.parseColor("#FF31C127"));
+        }
     }
 
     @Override
@@ -52,7 +58,7 @@ public class EventsRecyclerAdapter extends RecyclerView.Adapter<EventsRecyclerAd
     }
 
     public static class EventsViewHolder extends RecyclerView.ViewHolder {
-        TextView sportName, spotsText, venueString, startTime, endTime, leaveButton;
+        TextView sportName, spotsText, venueString, startTime, endTime, statusView;
         String eventID;
         String venueName;
         public EventsViewHolder(@NonNull View itemView, String venueName) {
@@ -63,7 +69,7 @@ public class EventsRecyclerAdapter extends RecyclerView.Adapter<EventsRecyclerAd
             venueString = itemView.findViewById(R.id.venue_name_text);
             startTime = itemView.findViewById(R.id.start_time_text);
             endTime = itemView.findViewById(R.id.end_time_text);
-            leaveButton = itemView.findViewById(R.id.leave_event_button);
+            statusView = itemView.findViewById(R.id.status_event_button);
             // Setting the name of the venue.
             this.venueName = venueName;
         }

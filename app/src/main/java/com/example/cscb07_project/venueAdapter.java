@@ -26,12 +26,14 @@ public class venueAdapter extends RecyclerView.Adapter<venueAdapter.MyViewHolder
     Context context;
     ArrayList<Venue> list;
     OnNoteListener onNoteListener;
+    boolean createEventButton;
 
 
-    public venueAdapter(Context context, ArrayList<Venue> list, OnNoteListener onNoteListener) {
+    public venueAdapter(Context context, ArrayList<Venue> list, OnNoteListener onNoteListener, boolean createEventButton) {
         this.context = context;
         this.list = list;
         this.onNoteListener = onNoteListener;
+        this.createEventButton = createEventButton;
 
     }
 
@@ -51,17 +53,22 @@ public class venueAdapter extends RecyclerView.Adapter<venueAdapter.MyViewHolder
         holder.sportsList.setText(venue.StringSportsOffered());
         holder.venue = venue;
 
-        holder.create_new_event.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                System.out.println("hi");
-                Intent intent = new Intent(context,CreateNewEvent.class);
-                intent.putExtra(VENUE, venue.venueID);
-                context.startActivity(intent);
-            }
-        });
+        if (!createEventButton){
+            holder.create_new_event.setClickable(false);
+            holder.create_new_event.setAlpha(0f);
+        }
+        else {
+            holder.create_new_event.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    System.out.println("hi");
+                    Intent intent = new Intent(context, CreateNewEvent.class);
+                    intent.putExtra(VENUE, venue.venueID);
+                    context.startActivity(intent);
+                }
+            });
 
-
+        }
     }
 
     @Override

@@ -20,6 +20,15 @@
             android:name=".CreateNewEvent"
             android:exported="false" />
         <activity
+            android:name=".ApproveEvents"
+            android:exported="false" />
+        <activity
+            android:name=".AdminVenue"
+            android:exported="false" />
+        <activity
+            android:name=".AdminScreen"
+            android:exported="false" />
+        <activity
             android:name=".EventsActivity"
             android:exported="false" />
         <activity
