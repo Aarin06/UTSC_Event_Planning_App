@@ -42,8 +42,6 @@ public class AdminScreen extends AppCompatActivity implements com.example.cscb07
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_screen);
 
@@ -56,7 +54,6 @@ public class AdminScreen extends AppCompatActivity implements com.example.cscb07
             public void onClick(View v) {
 
                 //Cat add code here to go to other activity or do whatever you need to do
-
             }
         });
 
@@ -134,7 +131,6 @@ public class AdminScreen extends AppCompatActivity implements com.example.cscb07
     }
 
     private void recyclerInit(){
-
         RecyclerView rv = findViewById(R.id.venueList);
         llm = new LinearLayoutManager(this);
         llm.setOrientation(RecyclerView.VERTICAL);

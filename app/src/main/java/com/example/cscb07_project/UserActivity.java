@@ -112,8 +112,10 @@ public class UserActivity extends AppCompatActivity implements com.example.cscb0
                         }
                     }
                     Venue v = new Venue(creatorID,location,name,openTime,sportsOffered,venueID,eventsList);
-                    for (Venue temp : vlist){
-                        if (temp.venueID == v.venueID){
+
+                    ArrayList<Venue> copy = new ArrayList<>(vlist);
+                    for (Venue temp : copy){
+                        if (temp.venueID != v.venueID){
                             vlist.remove(temp);
                         }
                     }
