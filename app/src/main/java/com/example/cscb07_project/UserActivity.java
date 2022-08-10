@@ -23,12 +23,12 @@ public class UserActivity extends AppCompatActivity implements com.example.cscb0
     DatabaseReference databaseReference;
     venueAdapter venueAdapter;
     ArrayList<Venue> vlist;
+    ArrayList<Venue> copy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-
 
         recyclerView = findViewById(R.id.venueList);
         databaseReference = FirebaseDatabase.getInstance().getReference("Venues");
@@ -36,9 +36,10 @@ public class UserActivity extends AppCompatActivity implements com.example.cscb0
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         vlist = new ArrayList<>();
-        venueAdapter = new venueAdapter(this,vlist,this);
+        venueAdapter = new venueAdapter(this,vlist,this, true);
         recyclerView.setAdapter(venueAdapter);
         update();
+        copy = new ArrayList<>(vlist);
 
     }
 
@@ -48,13 +49,15 @@ public class UserActivity extends AppCompatActivity implements com.example.cscb0
         Venue v = vlist.get(position);
 
         Intent intent = new Intent(this,EventsActivity.class);
-        intent.putExtra(VENUE, v.name);
-
+        System.out.println("The name is " + v.venueID);
+        intent.putExtra(VENUE, v.venueID);
+        finish();
         startActivity(intent);
     }
 
     public void goHome(View view) {
         Intent intent = new Intent(this, UserActivity.class);
+        finish();
         startActivity(intent);
     }
 
@@ -67,17 +70,21 @@ public class UserActivity extends AppCompatActivity implements com.example.cscb0
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                if(vlist.size() != 0){
+                    vlist.removeAll(vlist);
+                }
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     String creatorID = dataSnapshot.child("creatorID").getValue().toString();
                     String location = dataSnapshot.child("location").getValue().toString();
                     String name = dataSnapshot.child("name").getValue().toString();
                     String openTime = dataSnapshot.child("openTime").getValue().toString();
                     String venueID = dataSnapshot.child("venueID").getValue().toString();
+                    System.out.println("VenueID: "+venueID);
 
                     ArrayList<Event> eventsList = new ArrayList<>();
-                    DataSnapshot events = dataSnapshot.child("eventsList");
-                    //check for children
+
+                        DataSnapshot events = dataSnapshot.child("eventsList");
+                        //check for children
                     if (events.hasChildren()) {
                         for (DataSnapshot dataSnapshot1 : events.getChildren()) {
                             String eventName = dataSnapshot1.child("eventName").getValue().toString();
@@ -87,6 +94,7 @@ public class UserActivity extends AppCompatActivity implements com.example.cscb0
                             int numPlayers = Integer.parseInt(dataSnapshot1.child("numPlayers").getValue().toString());
                             String startTime = dataSnapshot1.child("startTime").getValue().toString();
                             String endTime = dataSnapshot1.child("endTime").getValue().toString();
+                            String date = dataSnapshot1.child("date").getValue().toString();
                             boolean eventApproved = Boolean.parseBoolean(dataSnapshot1.child("eventApproved").getValue().toString());
 
                             ArrayList<String> enrolledPlayers = new ArrayList<>();
@@ -97,9 +105,10 @@ public class UserActivity extends AppCompatActivity implements com.example.cscb0
                                     enrolledPlayers.add(player);
                                 }
                             }
-                            Event e = new Event(eventID, creator1ID, maxPlayers, numPlayers, eventName ,enrolledPlayers, startTime, endTime, eventApproved);
+                            Event e = new Event(eventID, creator1ID, maxPlayers, numPlayers, eventName, enrolledPlayers, startTime, endTime, eventApproved, date);
                         }
                     }
+
                     ArrayList<String> sportsOffered = new ArrayList<>();
                     DataSnapshot offered = dataSnapshot.child("sportsOffered");
                     if (offered.hasChildren()) {
@@ -109,11 +118,7 @@ public class UserActivity extends AppCompatActivity implements com.example.cscb0
                         }
                     }
                     Venue v = new Venue(creatorID,location,name,openTime,sportsOffered,venueID,eventsList);
-                    for (Venue temp : vlist){
-                        if (temp.venueID == v.venueID){
-                            vlist.remove(temp);
-                        }
-                    }
+
                     vlist.add(v);
 
                 }

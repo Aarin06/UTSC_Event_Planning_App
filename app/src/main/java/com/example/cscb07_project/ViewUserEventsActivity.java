@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -85,7 +86,7 @@ public class ViewUserEventsActivity extends AppCompatActivity {
                     return;
                 }
                 // Otherwise.
-                ViewUserEventsActivity.this.user = task.getResult().getValue(User.class);
+                ViewUserEventsActivity.this.user = new User(task);
                 // After user object is populated, start the listener.
                 ViewUserEventsActivity.this.startListener();
             }
@@ -143,21 +144,64 @@ public class ViewUserEventsActivity extends AppCompatActivity {
                     return;
                 }
                 // Otherwise.
-                ViewUserEventsActivity.this.user = task.getResult().getValue(User.class);
+                ViewUserEventsActivity.this.user = new User(task);
+                // Creating the views.
+                // Created Events.
+                created.setHasFixedSize(true);
+                created.setLayoutManager(new LinearLayoutManager(ViewUserEventsActivity.this, LinearLayoutManager.HORIZONTAL, false));
+                // Joined Events.
+                joined.setHasFixedSize(true);
+                joined.setLayoutManager(new LinearLayoutManager(ViewUserEventsActivity.this, LinearLayoutManager.HORIZONTAL, false));
+                fire.child("Venues").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        ArrayList<Event> createdEvents = new ArrayList<Event>();
+                        ArrayList<Event> joinedEvents = new ArrayList<Event>();
+                        // Looping through joined events.
+                        HashMap<String, Object> h1 = new HashMap<String, Object>(ViewUserEventsActivity.this.user.getEventsJoined());
+                        for (Object eID : h1.values()) {
+                            Event e = new Event(task, (String) eID);
+                            System.out.println(e.toString());
+                            if (e.getEventID().equals("N/A")) {
+                                ViewUserEventsActivity.this.user.removeJoined((String) eID);
+                                continue;
+                            }
+                            joinedEvents.add(e);
+                        }
+                        // Looping through created events.
+                        HashMap<String, Object> h2 = new HashMap<String, Object>(ViewUserEventsActivity.this.user.getEventsCreated());
+                        for (Object eID : h2.values()) {
+                            Event e = new Event(task, (String) eID);
+                            if (e.getEventID().equals("N/A")) {
+                                ViewUserEventsActivity.this.user.removeCreated((String) eID);
+                                continue;
+                            }
+                            createdEvents.add(e);
+                        }
+                        // Writing the new lists to the database.
+                        User user = ViewUserEventsActivity.this.user;
+                        fire.child("Users").child(user.getUserID()).child("eventsCreated").setValue(user.getEventsCreated());
+                        fire.child("Users").child(user.getUserID()).child("eventsJoined").setValue(user.getEventsJoined());
+                        // Adapters.
+                        adapterJoined = new EventsRecyclerAdapter(ViewUserEventsActivity.this, joinedEvents);
+                        adapterCreated = new EventsRecyclerAdapter(ViewUserEventsActivity.this, createdEvents);
+                        // Setting the adapters.
+                        created.setAdapter(adapterCreated);
+                        joined.setAdapter(adapterJoined);
+                    }
+                });
             }
         });
-        // Creating the views.
-        // Created Events.
-        created.setHasFixedSize(true);
-        created.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        // Joined Events.
-        joined.setHasFixedSize(true);
-        joined.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        // Adapters.
-        adapterJoined = new EventsRecyclerAdapter(this, user.getEventsJoined(), "Pan Am Sports Centre");
-        adapterCreated = new EventsRecyclerAdapter(this, user.getEventsCreated(), "Pan Am Sports Centre");
-        // Setting the adapters.
-        created.setAdapter(adapterCreated);
-        joined.setAdapter(adapterJoined);
+    }
+
+    public void goHome(View view) {
+        Intent intent = new Intent(this, UserActivity.class);
+        startActivity(intent);
+    }
+
+    public void myEvents(View view) {
+        Intent intent = new Intent(this, ViewUserEventsActivity.class);
+        finish();
+        startActivity(intent);
     }
 }

@@ -13,8 +13,10 @@ public class Venue implements Serializable {
     ArrayList<Event> eventsList;
 
     public Venue(){
+        // Default constructor required according to Firebase Documentation
     }
 
+    //Used by TeamUsers
     public Venue(String creatorID, String location, String name, String openTime, ArrayList<String> sportsOffered, String venueID,ArrayList<Event> eventsList) {
         this.creatorID = creatorID;
         this.location = location;
@@ -46,7 +48,7 @@ public class Venue implements Serializable {
     public ArrayList<String> getSportsOffered() {
         return sportsOffered;
     }
-
+    //TeamUsers
     public String StringSportsOffered() {
         String all="";
         for (String s : sportsOffered){
