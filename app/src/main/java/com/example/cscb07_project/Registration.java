@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Registration extends AppCompatActivity implements View.OnClickListener {
@@ -68,28 +69,39 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                 passwordField.setError("Password must be at least six characters.");
             return;
         }
-        fire.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        String uID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                        User user = new User(name, email, uID);
-                        FirebaseDatabase.getInstance().getReference("Users").child(
-                            FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(Registration.this, "Registration Successful!", Toast.LENGTH_LONG).show();
-                                    startActivity(new Intent(Registration.this, MainActivity.class));
-                                } else {
-                                    Toast.makeText(Registration.this, "Registration Unsuccessful.", Toast.LENGTH_LONG).show();
-                                }
+        fire.fetchSignInMethodsForEmail(email).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+            @Override
+            public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                if (task.getResult().getSignInMethods().size() == 0){
+                    fire.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                String uID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                User user = new User(name, email, uID);
+                                FirebaseDatabase.getInstance().getReference("Users").child(
+                                        FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(Registration.this, "Registration Successful!", Toast.LENGTH_LONG).show();
+                                            startActivity(new Intent(Registration.this, MainActivity.class));
+                                        } else {
+                                            Toast.makeText(Registration.this, "Registration Unsuccessful.", Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                });
+                            } else {
+                                Toast.makeText(Registration.this, "Registration Unsuccessful.", Toast.LENGTH_LONG).show();
                             }
-                        });
-                    } else {
-                        Toast.makeText(Registration.this, "Registration Unsuccessful.", Toast.LENGTH_LONG).show();
-                    }
+                        }
+                    });
+                } else {
+                    emailField.setError("Email already used.");
+                    return;
                 }
-            });
+
+            }
+        });
     }
 }
