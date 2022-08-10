@@ -51,13 +51,11 @@ public class AdminVenueEvents extends AppCompatActivity {
         //Retrieve venue passed by id from AdminScreen
         Intent intent = getIntent();
         venueID = intent.getStringExtra("venue");
-        Log.e(TAG, venueID);
 
         venueName = intent.getStringExtra("venueName");
         //Title of page: Venue's name
         TextView tv = findViewById(R.id.textView3);
         tv.setText(venueName);
-        Log.e(TAG, "Test 1 pass"); //success
 
         //Set
         FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -65,12 +63,14 @@ public class AdminVenueEvents extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.id_idRVEvent);
         recyclerView.setHasFixedSize(true);
+
         AdminEventAdapter adapter = new AdminEventAdapter(this,eventArrayList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
 
         //put a listener to update for changes like users joining
         ref.addValueEventListener(new ValueEventListener(){
-
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
