@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -39,11 +40,20 @@ public class AdminEventAdapter extends RecyclerView.Adapter<AdminEventAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Event event = list.get(position);
         holder.event_name.setText(event.getEventName());
-        holder.creator.setText(event.getCreatorID());
+
+        String creatorID = event.getCreatorID();
+        FirebaseDatabase.getInstance().getReference("Users").child(creatorID).child("email").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                holder.creator.setText(String.valueOf(task.getResult().getValue()));
+            }
+        });
         holder.start_time.setText(event.getStartTime());
         holder.end_time.setText(event.getEndTime());
         holder.cur_players.setText(Long.toString(event.getNumPlayers()));
         holder.max_players.setText(Long.toString(event.getMaxPlayers()));
+        String s1 = event.getDate();
+        holder.date.setText(s1);
 
     }
 
@@ -55,7 +65,7 @@ public class AdminEventAdapter extends RecyclerView.Adapter<AdminEventAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView event_name, creator, start_time, end_time, cur_players, max_players;
+        TextView event_name, creator, start_time, end_time, cur_players, max_players, date;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -66,6 +76,7 @@ public class AdminEventAdapter extends RecyclerView.Adapter<AdminEventAdapter.Vi
             end_time = itemView.findViewById(R.id.id_etAdminEndTime);
             cur_players = itemView.findViewById(R.id.id_etAdminNumPlayers);
             max_players = itemView.findViewById(R.id.id_etAdminMaxPlayers);
+            date = itemView.findViewById(R.id.id_etAdminDate);
 
         }
     }
