@@ -51,6 +51,7 @@ public class CreateNewEvent extends AppCompatActivity {
     String ampm[] = {"Select","AM","PM"};
     String monthsArr[] = {"Month","January","February","March","April","May","June","July","August","September","October","November","December"};
     String venueID;
+    ArrayList <String> eventIDs = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +65,7 @@ public class CreateNewEvent extends AppCompatActivity {
         creatorID = sp.getString("uID","");
 
         setUpSpinners();
+        getEvents();
 
         //Setup Text edits
         eName = (EditText)findViewById(R.id.eventName);
@@ -114,6 +116,7 @@ public class CreateNewEvent extends AppCompatActivity {
         if(!validateDate() | !validatePlayers()){
             return;
         }
+
         date = monthsArr[currentMonths] + "_" + String.valueOf(day) + "_"+ String.valueOf(year);
         startTime = currentSHours+":"+currentSMin+currentSAmPm;
         endTime = currentEHours+":"+currentEMin+currentEAmPm;
@@ -121,7 +124,10 @@ public class CreateNewEvent extends AppCompatActivity {
         enrolledPlayers = new ArrayList<>();
         enrolledPlayers.add(creatorID);
         Event e = new Event(eventID,creatorID,maxPlayers,1,eventName,enrolledPlayers,startTime,endTime,false,date);
-
+        if(!validateEvent(eventID)){
+            eName.setError("This event Already Exists");
+            return;
+        }
         db = FirebaseDatabase.getInstance();
         databaseReference = db.getReference("Venues").child(venueID).child("eventList");
         databaseReference.child(eventID).setValue(e).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -212,8 +218,6 @@ public class CreateNewEvent extends AppCompatActivity {
             return false;
         }
 
-
-
         Date start = new Date(tempYear,currentMonths-1,day,finalSHours,Integer.parseInt(currentSMin));
         Date end = new Date(tempYear,currentMonths-1,day,finalEHours,Integer.parseInt(currentEMin));
 
@@ -240,23 +244,30 @@ public class CreateNewEvent extends AppCompatActivity {
         return true;
     }
 
-//    public void validateEvent(){
-//        db = FirebaseDatabase.getInstance();
-//        databaseReference = db.getReference("Venues").child(venueID).child("eventList");
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
+    public void getEvents(){
+        db = FirebaseDatabase.getInstance();
+        databaseReference = db.getReference("Venues").child(venueID).child("eventList");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.hasChildren()) {
+                    if (eventIDs.size() != 0){
+                        eventIDs.removeAll(eventIDs);
+                    }
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        String eventID = dataSnapshot.child("eventID").getValue().toString();
+                        System.out.println(eventID + "\n");
+                        eventIDs.add(eventID);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
     private void setUpSpinners(){
 
@@ -355,6 +366,16 @@ public class CreateNewEvent extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+    }
+
+    public boolean validateEvent(String checkEvent){
+       for(String s : eventIDs){
+           System.out.println(s);
+           if (s.equals(checkEvent)) {
+               return false;
+           }
+       }
+       return true;
     }
 
 
