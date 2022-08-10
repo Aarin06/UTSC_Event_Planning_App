@@ -182,15 +182,25 @@ public class CreateNewEvent extends AppCompatActivity {
         int finalSHours,finalEHours;
 
         if (currentSAmPm.equals("AM")){
-            finalSHours = Integer.parseInt(currentSHours);
+            if(Integer.parseInt(currentSHours) == 12){
+                finalSHours = 0;
+            }
+            else{
+                finalSHours = Integer.parseInt(currentSHours);
+            }
         }
         else if (currentSAmPm.equals("PM")){
-            finalSHours = Integer.parseInt(currentSHours)+12;
+            if(Integer.parseInt(currentSHours) == 12){
+                finalSHours = Integer.parseInt(currentSHours);
+            }
+            else {
+                finalSHours = Integer.parseInt(currentSHours) + 12;
+            }
         }
         else{
-
             return false;
         }
+
 
         if (currentEAmPm.equals("AM")){
             finalEHours = Integer.parseInt(currentEHours);
@@ -202,28 +212,30 @@ public class CreateNewEvent extends AppCompatActivity {
             return false;
         }
 
-        Date start = new Date(tempYear,currentMonths+1,day,finalSHours,Integer.parseInt(currentSMin));
-        Date end = new Date(tempYear,currentMonths+1,day,finalEHours,Integer.parseInt(currentEMin));
 
-        if (start.getTime() - today.getTime() < 0){
+
+        Date start = new Date(tempYear,currentMonths-1,day,finalSHours,Integer.parseInt(currentSMin));
+        Date end = new Date(tempYear,currentMonths-1,day,finalEHours,Integer.parseInt(currentEMin));
+
+        if ((start.getTime() - today.getTime()) < 0){
             years.setError("This date and time has passed");
             return false;
         }
+
         System.out.println("StartTime: "+start.getTime()+"\t\tEndTime: "+end.getTime());
         System.out.println(end.getTime()-start.getTime());
         System.out.println(start);
         System.out.println(end);
 
         if (end.getTime()-start.getTime() < 1800000){
-
             years.setError("Session must be atleast 30 minutes.");
             return false;
         }
         if (end.getTime()-start.getTime() > 7200000){
-
             years.setError("Session must be at most 2 hours.");
             return false;
         }
+
 
         return true;
     }
