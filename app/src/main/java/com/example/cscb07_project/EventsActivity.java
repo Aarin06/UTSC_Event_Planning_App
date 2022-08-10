@@ -27,27 +27,13 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
     EventListAdapter myAdapter;
     ArrayList<Event> list;
 
-//    private Spinner event_selector;
-//    private Button join_event;
-
     private TextView back;
     private DatabaseReference ref;
 
-//    private String event_selected;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events);
-
-//        readData(); // read all events from data base
-//        event_selector = (Spinner)findViewById(R.id.event_selector);
-//        event_selector.setOnItemSelectedListener(this);
-//        ArrayAdapter<Event> adapter = new ArrayAdapter<Event>(this, android.R.layout.simple_spinner_item, events_list);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        event_selector.setAdapter(adapter);
-
-//        join_event = (Button)findViewById(R.id.join_event);
-//        join_event.setOnClickListener(this);
 
         recyclerView = findViewById(R.id.event_list);
         database = FirebaseDatabase.getInstance().getReference("Venues");
@@ -58,6 +44,7 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
         SharedPreferences p = getSharedPreferences("myprefs", Context.MODE_PRIVATE);
         Intent intent = getIntent();
         String venueID = intent.getStringExtra(UserActivity.VENUE);
+        System.out.println("The venue name is " + venueID);
         myAdapter = new EventListAdapter(this,list, p.getString("uID", "N/A"), venueID);
         recyclerView.setAdapter(myAdapter);
         database.child(venueID).addValueEventListener(new ValueEventListener() {
@@ -65,6 +52,7 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
                 for (DataSnapshot dataSnapshot : snapshot.child("eventList").getChildren()){ //adding all events to the list
+                    System.out.println("The vfdsa");
                     Event event = dataSnapshot.getValue(Event.class);
                     if (event.eventApproved == true){
                         list.add(event);
