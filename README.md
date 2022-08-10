@@ -12,3 +12,13 @@
 * User ID's are now stored in Shared Preferences after login
 * Implemented refresh button on view events screen when database change is detected
 * Changed enrolledPlayers field in Event class to type ArrayList<String>
+
+8/09/2022
+Refactoring Changes:
+- Rename Admin Venue and it's activity to AdminvenueActivity
+* Implemented AddVenue and ViewEvents, part of User Stories
+
+TODO:
+Final Notes for Prof Rawad, Vishal and TA team:
+* Can register a user account but admin account should be manually added.
+Steps: On home page, register a new user. Please remember the password. Go to Firebase, in the User node, find the most recent node/your created user and change the status field to 1 instead of 0. Proceed to login.

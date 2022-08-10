@@ -25,7 +25,6 @@ public class UserActivity extends AppCompatActivity implements com.example.cscb0
     ArrayList<Venue> vlist;
     ArrayList<Venue> copy;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
