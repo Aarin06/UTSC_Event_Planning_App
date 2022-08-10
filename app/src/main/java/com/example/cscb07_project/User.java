@@ -42,7 +42,7 @@ public class User extends Account {
         }
         // Joined events.
         User.this.eventsJoined = new HashMap<String, Object>();
-        events = res.child("eventsCreated");
+        events = res.child("eventsJoined");
         if (events.exists()) {
             // Loop through all events and add them to the list.
             for (DataSnapshot e : events.getChildren()) User.this.eventsJoined.put(e.getKey(), e.getValue());
