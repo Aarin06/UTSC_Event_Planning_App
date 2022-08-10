@@ -34,7 +34,7 @@ public class AdminVenueEvents extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_venue);
         //Set up approve events button
-        Button approveButton = (Button) findViewById(R.id.button3);
+        Button approveButton = (Button) findViewById(R.id.button3); //this button just takes you to approval screen, so its right
         approveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -46,15 +46,18 @@ public class AdminVenueEvents extends AppCompatActivity {
             }
         });
 
+
         //Handling DisplayingEvents:
         //Retrieve venue passed by id from AdminScreen
         Intent intent = getIntent();
         venueID = intent.getStringExtra("venue");
+        Log.e(TAG, venueID);
+
         venueName = intent.getStringExtra("venueName");
         //Title of page: Venue's name
         TextView tv = findViewById(R.id.textView3);
         tv.setText(venueName);
-        Log.e(TAG, "Test 1 pass");
+        Log.e(TAG, "Test 1 pass"); //success
 
         //Set
         FirebaseDatabase db = FirebaseDatabase.getInstance();

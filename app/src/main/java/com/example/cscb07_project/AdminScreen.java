@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -138,7 +139,7 @@ public class AdminScreen extends AppCompatActivity implements com.example.cscb07
 
         Intent intent = new Intent(this, AdminVenueEvents.class);
         intent.putExtra("venueName", v.name);
-        intent.putExtra("venue", venueIDs.get(position));
+        intent.putExtra("venue", v.venueID);
 
         startActivity(intent);
     }
