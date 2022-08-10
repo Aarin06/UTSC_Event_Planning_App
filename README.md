@@ -16,7 +16,7 @@
 8/09/2022
 Refactoring Changes:
 - Rename Admin Venue and it's activity to AdminvenueActivity
-- Modify the button in admin_venue to "view pending events"
+* Implemented AddVenue and ViewEvents, part of User Stories
 
 TODO:
 Final Notes for Prof Rawad, Vishal and TA team:
