@@ -24,7 +24,6 @@ public class UserActivity extends AppCompatActivity implements com.example.cscb0
     venueAdapter venueAdapter;
     ArrayList<Venue> vlist;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

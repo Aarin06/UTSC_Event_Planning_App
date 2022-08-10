@@ -73,8 +73,6 @@ public class AdminScreen extends AppCompatActivity implements com.example.cscb07
 
             }
         });
-
-
     }
 
     private Venue getVenue(DataSnapshot ds) {

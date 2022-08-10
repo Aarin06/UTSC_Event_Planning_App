@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ public class AdminVenueEvents extends AppCompatActivity {
     private RecyclerView recyclerView;
     private DatabaseReference ref;
     private ArrayList<Event> eventArrayList = new ArrayList<>();
+    private static final String TAG = "AdminVenueEvents";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class AdminVenueEvents extends AppCompatActivity {
         //Title of page: Venue's name
         TextView tv = findViewById(R.id.textView3);
         tv.setText(venueName);
+        Log.e(TAG, "Test 1 pass");
 
         //Set
         FirebaseDatabase db = FirebaseDatabase.getInstance();

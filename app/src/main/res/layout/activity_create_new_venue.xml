@@ -85,6 +85,8 @@
             android:layout_marginTop="36dp"
             android:layout_marginEnd="24dp"
             android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:inputType="time"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -136,7 +138,8 @@
                 tools:ignore="SpeakableTextPresentCheck"
 
                 android:focusable="false" />
-            */https://stackoverflow.com/questions/29385668/datepicker-and-timepicker-dialogs-take-two-clickes-of-button */
+            *https://stackoverflow.com/questions/63756554/what-is-the-purpose-setfocusabletrue-in-android-studio
+            /https://stackoverflow.com/questions/29385668/datepicker-and-timepicker-dialogs-take-two-clickes-of-button */
 
             <Button
                 android:id="@+id/id_btnAddSport"
@@ -161,7 +164,6 @@
                 android:ems="10"
                 android:hint="Enter Sport"
                 android:inputType="textPersonName"
-                android:text="Enter Sport"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/id_displaySportsOffered" />

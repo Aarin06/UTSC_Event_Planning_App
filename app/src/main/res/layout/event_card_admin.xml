@@ -28,7 +28,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/event_name"
+                android:id="@+id/id_etAdminEventName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -53,7 +53,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/creator"
+                android:id="@+id/id_etAdminCreator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -78,7 +78,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/start_time"
+                android:id="@+id/id_etAdminStartTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -97,7 +97,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/end_time"
+                android:id="@+id/id_etAdminEndTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -123,7 +123,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/cur_players"
+                android:id="@+id/id_etAdminNumPlayers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -149,7 +149,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/max_players"
+                android:id="@+id/id_etAdminMaxPlayers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"

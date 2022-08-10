@@ -77,7 +77,7 @@ public class CreateNewVenue extends AppCompatActivity {
         btSportsOffered.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (etSport.toString().trim().isEmpty()){
+                if (etSport.getText().toString().trim().isEmpty()){
                     etSport.setError("Sport name must not be empty"); // not showing
                     return;
                 }

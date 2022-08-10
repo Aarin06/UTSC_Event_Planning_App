@@ -60,12 +60,12 @@ public class AdminEventAdapter extends RecyclerView.Adapter<AdminEventAdapter.Vi
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            event_name = itemView.findViewById(R.id.event_name);
-            creator = itemView.findViewById(R.id.creator);
-            start_time = itemView.findViewById(R.id.start_time);
-            end_time = itemView.findViewById(R.id.end_time);
-            cur_players = itemView.findViewById(R.id.cur_players);
-            max_players = itemView.findViewById(R.id.max_players);
+            event_name = itemView.findViewById(R.id.id_etAdminEventName);
+            creator = itemView.findViewById(R.id.id_etAdminCreator);
+            start_time = itemView.findViewById(R.id.id_etAdminStartTime);
+            end_time = itemView.findViewById(R.id.id_etAdminEndTime);
+            cur_players = itemView.findViewById(R.id.id_etAdminNumPlayers);
+            max_players = itemView.findViewById(R.id.id_etAdminMaxPlayers);
 
         }
     }
