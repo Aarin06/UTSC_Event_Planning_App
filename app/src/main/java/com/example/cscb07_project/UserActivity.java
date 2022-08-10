@@ -23,7 +23,7 @@ public class UserActivity extends AppCompatActivity implements com.example.cscb0
     DatabaseReference databaseReference;
     venueAdapter venueAdapter;
     ArrayList<Venue> vlist;
-
+    ArrayList<Venue> copy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,7 @@ public class UserActivity extends AppCompatActivity implements com.example.cscb0
         venueAdapter = new venueAdapter(this,vlist,this, true);
         recyclerView.setAdapter(venueAdapter);
         update();
+        copy = new ArrayList<>(vlist);
 
     }
 
@@ -50,7 +51,7 @@ public class UserActivity extends AppCompatActivity implements com.example.cscb0
         Intent intent = new Intent(this,EventsActivity.class);
         System.out.println("The name is " + v.venueID);
         intent.putExtra(VENUE, v.venueID);
-
+        finish();
         startActivity(intent);
     }
 
@@ -69,17 +70,21 @@ public class UserActivity extends AppCompatActivity implements com.example.cscb0
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                if(vlist.size() != 0){
+                    vlist.removeAll(vlist);
+                }
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     String creatorID = dataSnapshot.child("creatorID").getValue().toString();
                     String location = dataSnapshot.child("location").getValue().toString();
                     String name = dataSnapshot.child("name").getValue().toString();
                     String openTime = dataSnapshot.child("openTime").getValue().toString();
                     String venueID = dataSnapshot.child("venueID").getValue().toString();
+                    System.out.println("VenueID: "+venueID);
 
                     ArrayList<Event> eventsList = new ArrayList<>();
-                    DataSnapshot events = dataSnapshot.child("eventsList");
-                    //check for children
+
+                        DataSnapshot events = dataSnapshot.child("eventsList");
+                        //check for children
                     if (events.hasChildren()) {
                         for (DataSnapshot dataSnapshot1 : events.getChildren()) {
                             String eventName = dataSnapshot1.child("eventName").getValue().toString();
@@ -100,9 +105,10 @@ public class UserActivity extends AppCompatActivity implements com.example.cscb0
                                     enrolledPlayers.add(player);
                                 }
                             }
-                            Event e = new Event(eventID, creator1ID, maxPlayers, numPlayers, eventName ,enrolledPlayers, startTime, endTime, eventApproved,date);
+                            Event e = new Event(eventID, creator1ID, maxPlayers, numPlayers, eventName, enrolledPlayers, startTime, endTime, eventApproved, date);
                         }
                     }
+
                     ArrayList<String> sportsOffered = new ArrayList<>();
                     DataSnapshot offered = dataSnapshot.child("sportsOffered");
                     if (offered.hasChildren()) {
@@ -112,11 +118,7 @@ public class UserActivity extends AppCompatActivity implements com.example.cscb0
                         }
                     }
                     Venue v = new Venue(creatorID,location,name,openTime,sportsOffered,venueID,eventsList);
-                    for (Venue temp : vlist){
-                        if (temp.venueID == v.venueID){
-                            vlist.remove(temp);
-                        }
-                    }
+
                     vlist.add(v);
 
                 }
