@@ -22,7 +22,6 @@ public class Event {
     String startTime; //java contains Date objects  //
     String endTime; //
     String date;    //
-    String venueName;
     boolean eventApproved;
 
     public Event(){}
