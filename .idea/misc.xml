@@ -3,8 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/catq/AndroidStudioProjects/FinalProj/CSCB07_Project/app/src/main/res/layout/activity_admin_venue.xml" value="0.264" />
-        <entry key="..\:/Users/catq/AndroidStudioProjects/FinalProj/CSCB07_Project/app/src/main/res/layout/event_card_admin.xml" value="0.72" />
+        <entry key="app/src/main/res/layout/event_card_admin.xml" value="0.72" />
         <entry key="app/src/main/res/layout/activity_admin_screen.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_admin_venue.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_approve_events.xml" value="0.2" />
@@ -21,7 +20,6 @@
         <entry key="app/src/main/res/layout/event_approve.xml" value="0.25" />
         <entry key="app/src/main/res/layout/event_card.xml" value="0.39194139194139194" />
         <entry key="app/src/main/res/layout/event_card_admin.xml" value="0.4" />
-        <entry key="app/src/main/res/layout/item.xml" value="0.190234375" />
         <entry key="app/src/main/res/layout/venueitem.xml" value="0.75" />
       </map>
     </option>
