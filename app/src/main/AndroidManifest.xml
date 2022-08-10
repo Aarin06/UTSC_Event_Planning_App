@@ -25,7 +25,7 @@
             android:name=".ApproveEvents"
             android:exported="false" />
         <activity
-            android:name=".AdminVenue"
+            android:name=".AdminVenueEvents"
             android:exported="false" />
         <activity
             android:name=".AdminScreen"

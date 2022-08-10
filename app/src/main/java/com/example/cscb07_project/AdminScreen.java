@@ -138,7 +138,7 @@ public class AdminScreen extends AppCompatActivity implements com.example.cscb07
     public void onNoteClick(int position) {
         Venue v = venues.get(position);
 
-        Intent intent = new Intent(this,AdminVenue.class);
+        Intent intent = new Intent(this, AdminVenueEvents.class);
         intent.putExtra("venueName", v.name);
         intent.putExtra("venue", venueIDs.get(position));
 

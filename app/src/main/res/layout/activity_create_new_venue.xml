@@ -7,20 +7,16 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="412dp"
-        android:layout_height="149dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="409dp"
+        android:layout_height="101dp"
         app:layout_constraintBottom_toTopOf="@+id/scrollViewForSportsAdmin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_tvCreateVenue"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/id_tvCreateVenue">
 
         <TextView
-            android:layout_width="78dp"
-            android:layout_height="22dp"
+            android:layout_width="90dp"
+            android:layout_height="21dp"
             android:text="Start Time"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/id_edStartTime"
@@ -33,11 +29,12 @@
             android:id="@+id/id_etName"
             android:layout_width="115dp"
             android:layout_height="48dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="36dp"
+            android:layout_marginEnd="16dp"
             android:ems="10"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toStartOf="@+id/id_edStartTime"
-            app:layout_constraintHorizontal_bias="0.459"
             app:layout_constraintStart_toEndOf="@+id/id_etLocation"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,7 +56,7 @@
             android:id="@+id/id_etLocation"
             android:layout_width="115dp"
             android:layout_height="48dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="36dp"
             android:ems="10"
             android:inputType="textPersonName"
@@ -86,23 +83,12 @@
             android:layout_width="114dp"
             android:layout_height="47dp"
             android:layout_marginTop="36dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="24dp"
             android:ems="10"
             android:inputType="time"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SpeakableTextPresentCheck" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="Sports Offered:"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -122,9 +108,9 @@
 
     <ScrollView
         android:id="@+id/scrollViewForSportsAdmin"
-        android:layout_width="410dp"
-        android:layout_height="476dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="411dp"
+        android:layout_height="458dp"
+        android:layout_marginBottom="76dp"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -137,57 +123,73 @@
             android:padding="16dp">
 
 
-            <Button
-                android:id="@+id/id_submitVenueButton"
-                android:layout_width="194dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="128dp"
-                android:layout_marginBottom="48dp"
-                android:text="Button"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/id_etEnterSport"
-                app:layout_constraintVertical_bias="1.0" />
-
             <TextView
                 android:id="@+id/id_displaySportsOffered"
-                android:layout_width="382dp"
-                android:layout_height="67dp"
-                android:text="                     "
+                android:layout_width="377dp"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:text=""
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/textView4"
+                tools:ignore="SpeakableTextPresentCheck"
+
+                android:focusable="false" />
+            */https://stackoverflow.com/questions/29385668/datepicker-and-timepicker-dialogs-take-two-clickes-of-button */
 
             <Button
                 android:id="@+id/id_btnAddSport"
-                android:layout_width="139dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="24dp"
+                android:layout_width="172dp"
+                android:layout_height="47dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:text="Add Sport"
+                app:layout_constraintBottom_toBottomOf="@+id/id_etEnterSport"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/id_etEnterSport"
-                app:layout_constraintTop_toBottomOf="@+id/id_displaySportsOffered" />
+                app:layout_constraintTop_toBottomOf="@+id/id_displaySportsOffered"
+                app:layout_constraintVertical_bias="0.0" />
 
             <EditText
                 android:id="@+id/id_etEnterSport"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="24dp"
+                android:layout_width="188dp"
+                android:layout_height="47dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="16dp"
                 android:ems="10"
                 android:hint="Enter Sport"
                 android:inputType="textPersonName"
                 android:text="Enter Sport"
-                app:layout_constraintEnd_toStartOf="@+id/id_btnAddSport"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/id_displaySportsOffered" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sports Offered:"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+
+    <Button
+        android:id="@+id/id_submitVenueButton"
+        android:layout_width="194dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:text="Submit Venue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollViewForSportsAdmin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

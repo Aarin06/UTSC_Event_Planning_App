@@ -3,12 +3,15 @@ package com.example.cscb07_project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -31,10 +34,42 @@ public class CreateNewVenue extends AppCompatActivity {
         EditText etLocation = (EditText) findViewById (R.id.id_etLocation);
         EditText etName = (EditText) findViewById(R.id.id_etName);
         EditText etTime = (EditText) findViewById(R.id.id_edStartTime);
-        getTime(etTime);
+        //getTime(etTime);
+        etTime.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                TimePickerDialog timepicker = new TimePickerDialog(CreateNewVenue.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hour, int minutes) {
+                        System.out.println("should be first");
+                        String ending;
+                        String strHour;
+                        String strMinutes;
+                        if (minutes < 10)
+                            strMinutes = "0" + minutes;
+                        else
+                            strMinutes = "" + minutes;
+
+                        if (hour > 12) {
+                            strHour = (hour - 12) + "";
+                            ending = "PM";
+                        } else {
+                            if (hour == 0){
+                                strHour = "12";
+                            } else
+                                strHour = "" + hour;
+                            ending = "AM";
+                        }
+                        etTime.setText(strHour + ":" + strMinutes + ending);
+                    }
+                }, 0, 0, false);
+                timepicker.show();
+            }
+        });
+
         Button btSportsOffered = (Button) findViewById(R.id.id_btnAddSport);
         EditText etSport = (EditText) findViewById(R.id.id_etEnterSport);
-
+        TextView textViewDisplay = (TextView) findViewById(R.id.id_displaySportsOffered);
         ArrayList<String> sportsOffered = new ArrayList<String>();
         ArrayList<Event> eventsList = new ArrayList<Event> ();
         //Modifying layout for sports
@@ -42,20 +77,22 @@ public class CreateNewVenue extends AppCompatActivity {
         btSportsOffered.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (etSport.toString().isEmpty()){
-                    etSport.setError("Sport name must not be empty");
+                if (etSport.toString().trim().isEmpty()){
+                    etSport.setError("Sport name must not be empty"); // not showing
                     return;
                 }
-                //Fill in details:
-                TextView textViewDisplay = (TextView) findViewById(R.id.id_displaySportsOffered);
-                String currentSport = textViewDisplay.toString();
 
-                int oldHeight = textViewDisplay.getHeight();
-                textViewDisplay.setHeight(oldHeight+15);
+                //Else: Fill in details:
+                String currentSport = etSport.getText().toString();
+                //Increase size of the view showing Sports Offered ; obsolete, replaced with multilinetextview https://stackoverflow.com/questions/27698139/how-to-make-android-edittext-expand-vertically-when-full
+//                int oldHeight = textViewDisplay.getLayoutParams().height;
+//                ViewGroup.LayoutParams params = textViewDisplay.getLayoutParams();
+//                params.width = oldHeight+20;
+//               textViewDisplay.setLayoutParams(params);
+               //https://stackoverflow.com/questions/9175391/re-setting-a-textview-height-programmatically
+
                 String s = textViewDisplay.getText().toString() + currentSport + "\n";
                 textViewDisplay.setText(s);
-
-                //clear old text
                 etSport.setText("");
 
                 //add to venue.sportsOffered;
@@ -97,6 +134,9 @@ public class CreateNewVenue extends AppCompatActivity {
                 else{
                     Venue v = new Venue(creatorID, location, name, openTime, sportsOffered, "0", eventsList);
                     passToFirebase(v);
+                    Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), AdminScreen.class);
+                    startActivity(intent);
                 }
             }
         });
@@ -112,6 +152,7 @@ public class CreateNewVenue extends AppCompatActivity {
         refVenues.child(id).setValue(venue);
         //on firebase, add the id as field
         refVenues.child(id).child("venueID").setValue(id);
+
     }
     public void getTime(EditText etTime){
         etTime.setOnClickListener(new View.OnClickListener(){
@@ -120,8 +161,26 @@ public class CreateNewVenue extends AppCompatActivity {
                 TimePickerDialog timepicker = new TimePickerDialog(CreateNewVenue.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hour, int minutes) {
-                        String s = hour + ":" + minutes;
-                        etTime.setText(s);
+                        System.out.println("should be first");
+                        String ending;
+                        String strHour;
+                        String strMinutes;
+                        if (minutes < 10)
+                            strMinutes = "0" + minutes;
+                        else
+                            strMinutes = "" + minutes;
+
+                        if (hour > 12) {
+                            strHour = (hour - 12) + "";
+                            ending = "PM";
+                        } else {
+                            if (hour == 0){
+                                strHour = "12";
+                            } else
+                                strHour = "" + hour;
+                            ending = "AM";
+                        }
+                        etTime.setText(strHour + ":" + strMinutes + ending);
                     }
                 }, 0, 0, false);
                 timepicker.show();
