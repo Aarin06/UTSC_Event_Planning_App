@@ -1,24 +1,10 @@
 # CSCB07_Project
-7/30/2022
-* Moved classes from Classes to com.example.cscb07_project
-* Changed type of userID from int to String under Account
-* Added field of type integer named status under Account to differentiate between admin and user
+Written in java and utilizing Android Studio and Firebase Realtime DB, we created an app that allows users to manage sporting events.
+As an admin user, you can:
+* Create new venues for regular users to add events
+* Approve/reject events requested by regular users
+* View venues where regular users may sign up for events
 
-8/02/2022
-
-* Added getters in the User class for FireBase serialization
-* Added, but did not implement, leaveEvent() method in User class
-* Added EventRecyclerAdapter for RecyclerView display for viewing events
-* User ID's are now stored in Shared Preferences after login
-* Implemented refresh button on view events screen when database change is detected
-* Changed enrolledPlayers field in Event class to type ArrayList<String>
-
-8/09/2022
-Refactoring Changes:
-- Rename Admin Venue and it's activity to AdminvenueActivity
-* Implemented AddVenue and ViewEvents, part of User Stories
-
-TODO:
-Final Notes for Prof Rawad, Vishal and TA team:
-* Can register a user account but admin account should be manually added.
-Steps: On home page, register a new user. Please remember the password. Go to Firebase, in the User node, find the most recent node/your created user and change the status field to 1 instead of 0. Proceed to login.
+As a regular user, you can:
+* Make/request events (that await approval)
+* Join events, assuming space permitting
